@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {ReactComponent as Logo} from "../../assets/crown.svg"
 import {
   HeaderContainer,
@@ -6,16 +6,13 @@ import {
   OptionsContainer,
   OptionLink
 } from  "./Header.style"
-import CartIcon from "../cart-icon/CartIcon.component";
-import CartDropdown from "../cart-dropdown/CartDropdown.component";
+import {default as CartIcon} from "../cart-icon/CartIcon.container";
+import {default as CartDropdown} from "../cart-dropdown/CartDropdown.container";
 import { auth } from "../../service/firebase/Firebase.utils";
-import CurrentUserContext from "../../contexts/current-user/CurrentUser.context";
-import { CartContext } from "../../contexts/cart/Cart.context";
 
-function Header(){
-   const currentUser=useContext(CurrentUserContext)
-   const  {state}  = useContext(CartContext);
-   const {hidden}=state;
+
+function Header({currentUser, hidden }){
+   
    return (
    <HeaderContainer>
     <LogoContainer to='/'>

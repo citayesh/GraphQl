@@ -1,15 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {CollectionsOverviewContainer } from './CollectionsOverview.style';
 import CollectionPreview from '../collection-preview/Collection-preview.component';
-import CollectionsContext from '../../contexts/collections/Collections.context';
-import Spinner from '../with-spinner/Spinner.component';
 
-function CollectionsOverview (){
-  const collectionsMap = useContext(CollectionsContext);
-  if(collectionsMap){
-    const collections = Object.keys(collectionsMap).map(
-      key => collectionsMap[key]
-    );  
+function CollectionsOverview ({collections}){ 
   return(  
   <CollectionsOverviewContainer>
     {collections.map(({ id, ...otherCollectionProps }) => (
@@ -17,11 +10,6 @@ function CollectionsOverview (){
     ))}
   </CollectionsOverviewContainer>
 )
-    }else{
-return(
-  <Spinner/>
-)
-    }
   
 }
 

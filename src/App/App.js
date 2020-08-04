@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {Switch, Route,Redirect} from 'react-router-dom'
 import './App.css';
-import HomePage from './pages/homepage/HomePage.component';
-import ShopPage from './pages/shoppage/ShopPage.componet';
-import Header from './components/header/Header.component';
-import SigninUp from './pages/sign-in-up-page/SigninUp.component';
-import CheckoutPage from './pages/checkout/CheckoutPage.component';
-import CurrentUserContext from './contexts/current-user/CurrentUser.context';
-import { auth, createUserProfileDocument } from './service/firebase/Firebase.utils';
+import HomePage from '../pages/homepage/HomePage.component';
+import ShopPage from '../pages/shoppage/ShopPage.componet';
+import  {default as Header}from '../components/header/header.container';
+import SigninUp from '../pages/sign-in-up-page/SigninUp.component';
+import {default as CheckoutPage} from '../pages/checkout/CheckoutPage.container';
+import { auth, createUserProfileDocument } from '../service/firebase/Firebase.utils';
 
 
 function App (){
@@ -33,9 +32,7 @@ function App (){
     },[])
     return (
       <div>
-        <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        </CurrentUserContext.Provider>
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import CheckoutItem from "../../components/checkout-item/CheckoutItem.component";
+import React from "react";
+import {default as CheckoutItem} from "../../components/checkout-item/CheckoutItem.container";
 import StripeCheckoutButton from '../../components/stripeButton/stripeButton.component'
 import {
   CheckoutPageContainer,
@@ -8,11 +8,9 @@ import {
   TotalContainer,
   WarningContainer
 } from './CheckoutPage.style';
-import { CartContext } from "../../contexts/cart/Cart.context";
 
-const CheckoutPage =()=>{
-    const {state,cartTotal}=useContext(CartContext);
-    const{cartItems}=state;
+const CheckoutPage =({cartItems,total})=>{
+  
 
     return(
         <CheckoutPageContainer>
@@ -34,15 +32,15 @@ const CheckoutPage =()=>{
           </HeaderBlockContainer>
         </CheckoutHeaderContainer>
         {cartItems.map(cartItem => (
-          <CheckoutItem key={cartItem.id} item={cartItem} />
+          <CheckoutItem key={cartItem.id} cartItem={cartItem} />
         ))}
-        <TotalContainer>TOTAL: ${cartTotal}</TotalContainer>
+        <TotalContainer>TOTAL: ${total}</TotalContainer>
         <WarningContainer>
       *Please use the following test credit card for payments*
       <br />
       4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
     </WarningContainer>
-    <StripeCheckoutButton price={cartTotal} />
+    <StripeCheckoutButton price={total} />
       </CheckoutPageContainer>
     );
     

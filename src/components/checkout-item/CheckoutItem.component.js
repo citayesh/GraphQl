@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   CheckoutItemContainer,
   ImageContainer,
@@ -6,11 +6,10 @@ import {
   QuantityContainer,
   RemoveButtonContainer
 } from'./CheckoutItem.style';
-import { CartContext } from '../../contexts/cart/Cart.context';
 
-const CheckoutItem = ({ item}) => {
-  const  { name, imageUrl, price, quantity } =item;
-  const {dispatch} =useContext(CartContext);
+const CheckoutItem = ({cartItem, clearItem, addItem, removeItem }) => {
+  const  { name, imageUrl, price, quantity } =cartItem;
+
   return(
   <CheckoutItemContainer>
     <ImageContainer>
@@ -19,17 +18,17 @@ const CheckoutItem = ({ item}) => {
     <TextContainer>{name}</TextContainer>
     <TextContainer>{name}</TextContainer>
     <QuantityContainer>
-        <div className='arrow' onClick={()=>dispatch({type:"REMOVE_ITEM",payload:item})}>
+        <div className='arrow' onClick={()=>removeItem(cartItem)}>
           &#10094;
         </div>
         <span className='value'>{quantity}</span>
-        <div className='arrow' onClick={()=>dispatch({type:"ADD_ITEM",payload:item})}>
+        <div className='arrow' onClick={()=>addItem(cartItem)}>
           &#10095;
         </div>
       </QuantityContainer>
     <TextContainer>{price}</TextContainer>
     <RemoveButtonContainer
-    onClick={()=>dispatch({type:"CLEAR_ITEM_FROM_CART",payload:item})}>&#10005;</RemoveButtonContainer>
+    onClick={()=>clearItem(cartItem)}>&#10005;</RemoveButtonContainer>
   </CheckoutItemContainer>
 );
 }

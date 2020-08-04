@@ -1,17 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   CollectionPageContainer,
   CollectionTitle,
   CollectionItemsContainer} from './Collection.style'
 
-import CollectionItem from "../../components/collection-item/CollectionItem.component";
-import CollectionsContext from "../../contexts/collections/Collections.context";
-import Spinner from "../../components/with-spinner/Spinner.component";
+import {default as CollectionItem} from "../../components/collection-item/CollectionItem.container";
 
-const CollectionPage = ({match}) => {
-  const collections = useContext(CollectionsContext);
-  if(collections) {
-  const collection = collections[match.params.collectionId];
+const CollectionPage = ({collection}) => {
   const { title, items } = collection;
   return (
       <CollectionPageContainer>
@@ -23,11 +18,6 @@ const CollectionPage = ({match}) => {
         </CollectionItemsContainer>
       </CollectionPageContainer>
     );
-        }else{
-          return(
-            <Spinner/>
-          )
-        }
   };
 
   export default CollectionPage;

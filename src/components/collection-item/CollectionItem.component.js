@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     CollectionItemContainer,
     CollectionFooterContainer,
@@ -7,11 +7,9 @@ import {
     NameContainer,
     PriceContainer
   } from "./CollectionItem.style"
-import { CartContext } from '../../contexts/cart/Cart.context';
 
-const CollectionItem=({item})=>{
+const CollectionItem=({item,addItem})=>{
  const {name,imageUrl,price}=item;
- const {dispatch}=useContext(CartContext)
  
     return(
             <CollectionItemContainer>
@@ -20,7 +18,7 @@ const CollectionItem=({item})=>{
                     <NameContainer>{name}</NameContainer>
                     <PriceContainer>{price}</PriceContainer>
                 </CollectionFooterContainer> 
-                <AddButton onClick={()=>dispatch({type:"ADD_ITEM",payload:item})} inverted>add to cart </AddButton>  
+                <AddButton onClick={() => addItem(item)} inverted>add to cart </AddButton>  
             </CollectionItemContainer>
 )}
 
